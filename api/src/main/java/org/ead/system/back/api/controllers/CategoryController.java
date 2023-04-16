@@ -11,8 +11,9 @@ import java.net.http.HttpResponse;
 @RestController()
 @RequestMapping("/category")
 public class CategoryController {
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity getCategories(){
-        return ResponseEntity.ok(3);
+
+        return ResponseEntity.ok("");
     }
 }

@@ -1,7 +1,19 @@
-plugins {
-    id 'java'
-}
+buildscript {
+    repositories {
+        mavenCentral()
+    }
 
+}
+plugins {
+    id 'java-conventions'
+    id 'application'
+    id 'org.springframework.boot' version '3.0.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+bootJar {
+    archiveName 'api.jar'
+    destinationDirectory.set(file("${rootProject.buildDir}/libs"))
+}
 group 'org.ead.system.back.api'
 version '1.0-SNAPSHOT'
 
@@ -10,14 +22,19 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.0.5'
+
     implementation(project(":domain"))
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.0.5'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '3.0.5'
+
 
 }
 
-test {
-    useJUnitPlatform()
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'org.ead.system.back.api.Main'
+        )
+    }
+
 }
